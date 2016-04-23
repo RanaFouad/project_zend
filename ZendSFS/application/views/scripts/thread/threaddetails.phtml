@@ -1,0 +1,63 @@
+
+<br /><br />
+<div class="container">
+
+	<div class="panel-group">
+
+
+	    <div class="panel panel-success">
+    		<div class="panel-heading"><?php echo $this->thread[0]['thread_title']; 
+    			$auth = Zend_Auth::getInstance(); 
+      			$user = $auth->getIdentity();
+      			if($user->admin == 1 || $user->user_id == $this->thread[0]['thread_user_id'])
+      			{	
+
+
+    		 ?>
+
+
+    			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/deletethread/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Delete Thread</button></a>
+
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/editthread/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Edit Thread</button></a>
+      			<?php
+      			}	
+
+      			?>	
+      			
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/replies/addreply/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Add Reply</button></a>
+      			<?php
+      			$auth = Zend_Auth::getInstance();
+        		$user = $auth->getIdentity();
+        		if($user->admin == 1)
+        		{
+        			if($this->thread[0]['ban_reply']==0)
+        			{	
+      			?>
+
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/banreply/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Ban Reply</button></a>
+      			<?php
+      				}
+   					else
+   					{
+   					
+      			?>
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/releasebanreply/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Release Ban Reply</button></a>
+      			<?php
+      				}
+      			}	
+      			?>
+
+      		<div class="clearfix"></div>	
+
+
+    		</div>
+      		<div class="panel-body"><?php echo $this->thread[0]['thread_body'];  ?></div>
+      		<div class="panel-footer">Panel footer</div>
+    	</div>
+
+
+
+	</div>	
+
+
+</div>

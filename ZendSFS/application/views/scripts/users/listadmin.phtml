@@ -1,0 +1,63 @@
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl()?>/CSS/bootstrap.min.css">
+ 
+	
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/list">Home</a></li>
+      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/add">Add User</a></li>
+      
+      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/listadmins">List Admins </a></li>
+       <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/ban">Ban Users </a></li>
+     
+     
+    </ul>
+  </div>
+</nav>
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<br>
+		<br>
+		<br>
+<table  class="table table-condensed" >
+	<th>Username</th>
+	<th>Email</th>
+	<th>Gender</th>
+	<th>Edit</th>
+	<th>Delete</th>
+	<th>Ban</th>
+	<th>Remove Admin</th>
+<?php if($this->Users) { 
+
+	for($i=0; $i<count($this->Users); $i++){
+		if($this->Users[$i]['admin']==1 && $this->Users[$i]['ban']==0 ){
+		echo "<tr>";
+		echo '<td>'.$this->Users[$i]['username'].'</td>';
+		echo '<td> '.$this->Users[$i]['useremail'].'</td>';
+		echo '<td> '.$this->Users[$i]['gender'].'</td>';
+		echo '<td><a class="btn btn-primary" href="'.$this->baseUrl().'/index.php/Users/edit/user_id/'.$this->Users[$i]['user_id'].'"> Edit</a></td>';
+		echo '<td><a  class="btn btn-danger" href="'.$this->baseUrl().'/index.php/Users/delete/user_id/'.$this->Users[$i]['user_id'].'" >Delete</a></td>';
+		echo '<td><a  class="btn btn-warning" href="'.$this->baseUrl().'/index.php/ban/user_id/'.$this->Users[$i]['user_id'].'" >Ban</a></td>';
+		echo '<td><a  class="btn btn-info" href="'.$this->baseUrl().'/index.php/Users/removeadmin/user_id/'.$this->Users[$i]['user_id'].'" >Remove</a></td>';
+		echo "</tr>";
+}
+	}
+}
+
+?>
+</table>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl()?>/CSS/bootstrap.min.css">
+ 
+	
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+     <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/list">Home</a></li>
+      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/add">Add User</a></li>
+      
+      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/listadmin">List Admins </a></li>
+       <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Posts/add">Ban Users </a></li>
+     
+     
+    </ul>
+  </div>
+</nav>
+<div class="row">
+	<div class="col-lg-2"></div>
+	<div class="col-sm-8">
+    <h1>ADd User</h1>
+
+    <?php echo $this->form; ?>
+	</div>
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

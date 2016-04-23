@@ -1,0 +1,209 @@
+<br /><br />
+
+<?php
+	if($this->category)
+	{
+		for($i=0;$i<count($this->category);$i++)
+		{
+?>			 
+			<div class="panel panel-primary">
+      			<div class="panel-heading"><?php echo $this->category[$i]['cat_title']; 
+      			$auth = Zend_Auth::getInstance(); 
+      			$user = $auth->getIdentity();
+      			if($user->admin == 1)
+      			{	
+      			?>
+      				<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/Usercategory/deletecategory/cat_id/'.$this->category[$i]['cat_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;">Delete category</button></a>
+      				<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/Usercategory/editcategory/cat_id/'.$this->category[$i]['cat_id'];  ?>"><button  class="btn btn-default pull-right" style="margin: 3px 3px;">Edit category</button></a>
+      				<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/sub-category/addfourm/cat_id/'.$this->category[$i]['cat_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Add Forum</button></a>
+      			<?php
+      			}
+      			?>	
+      				<div class="clearfix"></div>
+      			</div>
+     			<div class="panel-body">
+     				
+     				<?php
+     					for($j=0;$j<count($this->sub_category);$j++)
+     					{
+     						if($this->category[$i]['cat_id'] == $this->sub_category[$j]['cat_id'])
+     						{
+
+     				?>
+     							<div class="panel panel-info">
+      								<div class="panel-heading"><?php
+      									echo $this->sub_category[$j]['sub_cat_title'];
+      									$auth = Zend_Auth::getInstance(); 
+      									$user = $auth->getIdentity();
+      									if($user->admin == 1)
+      									{	
+      								?>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/sub-category/deletesubcategory/sub_cat_id/'.$this->sub_category[$j]['sub_cat_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;">Delete fourm</button></a>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/sub-category/editsubcategory/sub_cat_id/'.$this->sub_category[$j]['sub_cat_id'];  ?>"><button  class="btn btn-default pull-right" style="margin: 3px 3px;">Edit fourm</button></a>
+  											<?php 
+  												if($this->sub_category[$j]['ban_thread'] == 0)
+  												{	
+  											?>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/sub-category/banthread/sub_cat_id/'.$this->sub_category[$j]['sub_cat_id'];  ?>"><button  class="btn btn-default pull-right" style="margin: 3px 3px;">Ban Threads</button></a>
+      										<?php
+      											}
+      											else
+      											{	
+      										?>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/sub-category/releasebanthread/sub_cat_id/'.$this->sub_category[$j]['sub_cat_id'];  ?>"><button  class="btn btn-default pull-right" style="margin: 3px 3px;">Release Ban Threads</button></a>	
+      			<?php
+      				}
+      			}
+      			if($this->sub_category[$j]['ban_thread'] == 0)
+      			{	
+      			?>
+
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/addthread/sub_cat_id/'.$this->sub_category[$j]['sub_cat_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Add Thread</button></a>	
+      			<?php
+      			}
+      			?>							
+      			
+      				<div class="clearfix"></div>
+      								</div>
+     		 						<div class="panel-body">
+									<?php
+									for($k=0;$k<count($this->thread);$k++)
+     								{
+     									if($this->sub_category[$j]['sub_cat_id'] == $this->thread[$k]['sub_cat_id'] && $this->thread[$k]['sticky']==1)
+     									{
+
+									?>   
+									<div class="panel panel-danger">
+      									<div class="panel-heading"><?php 
+      									echo $this->thread[$k]['thread_title'];
+      									$auth = Zend_Auth::getInstance(); 
+      									$user = $auth->getIdentity();
+      									if($user->admin == 1 || $user->user_id == $this->thread[$k]['thread_user_id'])
+      									{	
+
+      									?>
+      									
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/deletethread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Delete Thread</button></a>
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/editthread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Edit Thread</button></a>
+      									<?php
+      									}
+      									if($user->admin == 1)
+      									{	
+      										if($this->thread[$k]['sticky'] == 0)
+      										{	
+      									?>
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/stickythread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Mark Thread As Sticky</button></a>
+      									<?php 
+      										}
+      										else
+      										{	
+      										?>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/releasestickythread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Release Sticky</button></a>	
+      									<?php	
+      										}
+      									}
+      									?>
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/threaddetails/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >More Details</button></a>	
+      									<div class="clearfix"></div>
+      									</div>
+			      				
+    								</div>
+    								<?php
+    									}
+    								}	
+    								?>	
+
+
+
+
+
+								<?php
+									for($k=0;$k<count($this->thread);$k++)
+     								{
+     									if($this->sub_category[$j]['sub_cat_id'] == $this->thread[$k]['sub_cat_id'] && $this->thread[$k]['sticky']==0)
+     									{
+
+									?>   
+									<div class="panel panel-danger">
+      									<div class="panel-heading"><?php 
+      									echo $this->thread[$k]['thread_title'];
+      									$auth = Zend_Auth::getInstance(); 
+      									$user = $auth->getIdentity();
+      									if($user->admin == 1 || $user->user_id == $this->thread[$k]['thread_user_id'])
+      									{	
+
+      									?>
+      									
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/deletethread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Delete Thread</button></a>
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/editthread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Edit Thread</button></a>
+      									<?php
+      									}
+      									if($user->admin == 1)
+      									{	
+      										if($this->thread[$k]['sticky'] == 0)
+      										{	
+      									?>
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/stickythread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Mark Thread As Sticky</button></a>
+      									<?php 
+      										}
+      										else
+      										{	
+      										?>
+      										<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/releasestickythread/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Release Sticky</button></a>	
+      									<?php	
+      										}
+      									}
+      									?>
+
+      									<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/threaddetails/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >More Details</button></a>	
+      									<div class="clearfix"></div>
+      									</div>
+			      				
+    								</div>
+    								<?php
+    									}
+    								}	
+    								?>	
+    				
+
+
+
+
+
+
+     		 						</div>
+    							</div>
+
+
+
+    				<?php			
+    						}
+
+    					}
+    				?>		
+
+
+
+
+
+
+
+
+     			</div>
+    		</div>
+
+
+<?php
+
+		}	
+
+	}	
+
+
+
+?>	 

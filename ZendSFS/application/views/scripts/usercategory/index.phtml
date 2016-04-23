@@ -1,0 +1,77 @@
+<br /><br />
+
+
+<?php
+	if($this->category)
+	{
+		for($i=0;$i<count($this->category);$i++)
+		{
+?>
+	<div class="panel panel-primary">
+		<div class="panel-heading"><?php echo $this->category[$i]['cat_title'];?>
+		</div>
+		<div class="panel-body">
+		<?php
+     		for($j=0;$j<count($this->sub_category);$j++)
+     		{
+     			if($this->category[$i]['cat_id'] == $this->sub_category[$j]['cat_id'])
+     			{
+     	?>
+     		<div class="panel panel-info">
+     		<div class="panel-heading"><?php
+      		echo $this->sub_category[$j]['sub_cat_title'];?>
+      		</div>	
+      		<div class="panel-body">
+      			<?php
+					for($k=0;$k<count($this->thread);$k++)
+     				{
+     					if($this->sub_category[$j]['sub_cat_id'] == $this->thread[$k]['sub_cat_id'] && $this->thread[$k]['sticky']==1)
+     					{
+
+				?>   
+				<div class="panel panel-danger">
+      				<div class="panel-heading"><?php 
+      					echo $this->thread[$k]['thread_title'];?>
+      					<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/index/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >More Details</button></a>	
+      									<div class="clearfix"></div>
+      				</div>
+      			</div>		
+      				<?php
+    					}
+    				}	
+    			?>
+    			<?php
+					for($k=0;$k<count($this->thread);$k++)
+     				{
+     					if($this->sub_category[$j]['sub_cat_id'] == $this->thread[$k]['sub_cat_id'] && $this->thread[$k]['sticky']==0)
+     					{
+     			?>
+     			<div class="panel panel-danger">
+      				<div class="panel-heading"><?php 
+      				echo $this->thread[$k]['thread_title'];?>
+      				<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/thread/index/thread_id/'.$this->thread[$k]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >More Details</button></a>	
+      				<div class="clearfix"></div>
+      				</div>			
+      			</div>	
+      			<?php
+    				}
+    			}	
+    			?>	
+    					
+
+     		</div>	
+		</div>
+
+		<?php			
+    		}
+
+    	}
+    	?>	
+	</div>
+
+	</div>
+
+<?php			
+   	}
+}
+?>		
