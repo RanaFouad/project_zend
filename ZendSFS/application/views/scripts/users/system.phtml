@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?php echo $this->baseUrl()?>/CSS/bootstrap.min.css">
- 
+  
 	
 </head>
 <body>
@@ -15,16 +15,45 @@
         <a  class="btn" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/system'?>">System Status </a>
 
 <div class="row">
-	<div class="col-lg-2"></div>
+	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-    <h1>Edit User</h1>
+		<br>
+		<br>
+		<br>
+		<a id="deactive" class="btn btn-danger" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/deactivestatus'?>">Deactive System</a>
+		<a id="active" class="btn btn-success" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/activestatus'?>">Active System<a>
+		<?php
+   if (isset($this->test)) { ?>
+   <script>
+    document.getElementById('deactive').setAttribute("disabled", "true");
 
-    <?php echo $this->form; ?>
-	</div>
+
+   </script>
+   <br>
+   <br>
+   
+   <h3>System is Dective<h3>
+  <h4>Only Admins can log in  <h4>
+         
+<?php } else { ?>
+<br>
+<br>
+<h3>System is Active<h3>
+<script>
+    document.getElementById('active').setAttribute("disabled", "true");
+
+
+   </script>
+
+
+<?php }  ?>
+
+           
+			
 
 
 </div>
 </div>
-</div>
+
 </body>
 </html>

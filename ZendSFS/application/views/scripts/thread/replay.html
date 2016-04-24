@@ -1,0 +1,87 @@
+<br /><br />
+<h1>Thread DETAILS</h1>
+<br /><br />
+<div class="container">
+
+	<div class="panel-group">
+
+
+	    <div class="panel panel-success">
+    		<div class="panel-heading"><?php echo $this->thread[0]['thread_title'];  ?>
+
+
+    			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/deletethread/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Delete Thread</button></a>
+
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/editthread/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Edit Thread</button></a>	
+      			
+      			<button class="btn btn-default pull-right" style="margin: 3px 3px;" onclick="show_div()">Add Reply</button></a>
+      			<?php
+      			$auth = Zend_Auth::getInstance();
+        		$user = $auth->getIdentity();
+        		if($user->admin == 1)
+        		{
+        			if($this->thread[0]['ban_reply']==0)
+        			{	
+      			?>
+
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/banreply/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Ban Reply</button></a>
+      			<?php
+      				}
+   					else
+   					{
+   					
+      			?>
+      			<a href="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/releasebanreply/thread_id/'.$this->thread[0]['thread_id'];  ?>"><button class="btn btn-default pull-right" style="margin: 3px 3px;" >Release Ban Reply</button></a>
+      			<?php
+      				}
+      			}	
+      			?>
+
+      		<div class="clearfix"></div>	
+
+
+    		</div>
+      		<div class="panel-body"><?php echo $this->thread[0]['thread_body'];  ?></div>
+      		<div class="panel-footer">Panel footer</div>
+    	</div>
+      <br>
+      <h3>Comments</h3>
+<?php if($this->replies) { 
+
+  for($i=0; $i<count($this->replies); $i++){
+ 
+    echo "<tr>";
+    echo '<td>'.$this->replies[$i]['reply_user_id'].'</td>';
+    echo '<td> '.$this->replies[$i]['reply_body'].'</td>';
+    echo '<td> '.$this->replies[$i]['gender'].'</td>';
+    echo '<td><a class="btn btn-primary" href="'.$this->baseUrl().'/Zend/ZendSFS/public/index.php/Users/edit/user_id/'.$this->replies[$i]['user_id'].'"> Edit</a></td>';
+    echo '<td><a  class="btn btn-danger" href="'.$this->baseUrl().'/Zend/ZendSFS/public/index.php/Users/delete/user_id/'.$this->replies[$i]['user_id'].'" >Delete</a></td>';
+    echo '<td><a  class="btn btn-warning" href="'.$this->baseUrl().'/Zend/ZendSFS/public/index.php/Users/ban/user_id/'.$this->replies[$i]['user_id'].'" >Ban</a></td>';
+    echo '<td><a  class="btn btn-info" href="'.$this->baseUrl().'/Zend/ZendSFS/public/index.php/Users/admin/user_id/'.$this->replies[$i]['user_id'].'" >Admin</a></td>';
+    echo "</tr>";}
+}?>
+      <div id="replay" style="visibility: hidden">
+        <form action="<?php $auth = Zend_Auth::getInstance();  $user = $auth->getIdentity();  echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/replay/thread_id/'.$this->thread[0]['thread_id'];  ?>" method="post">
+        <input type="text" name="replay" class="form-control">
+        <br>
+        <input type="submit" class="btn btn-primary form-control" value="Add Comment" name="submit" >
+      </form>
+      </div>
+      <script type="text/javascript">
+
+           function show_div()  {
+            document.getElementById("replay").style.visibility = 'visible';
+                console.log("shoowwww");
+           }
+
+
+
+      </script>
+
+
+
+
+	</div>	
+
+
+</div>

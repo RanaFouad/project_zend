@@ -1,0 +1,29 @@
+#register,#log{
+
+	border-style: groove;
+    border-color: #2e6da4;
+    border-width: 10px;
+    /*background:#2e6da4*/;
+   /* background-color: green;*/
+    
+}
+h1{
+	/*font-style: italic;*/
+	font-variant: normal;
+	color: #00F;
+	font-size: 49.3px;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+body {
+    background-color: lightblue;
+}
+
+dt label{
+
+	/*font-style: italic;*/
+	font-variant: normal;
+	color: #001a33;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 20.3px;
+}
+

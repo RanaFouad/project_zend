@@ -1,0 +1,24 @@
+
+<?php
+	if($this->replies){
+?>
+<form action="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/thread/edit/thread_id/'.$this->thread[0]['thread_id'].'/reply_id/'.$this->replies[$i]['reply_id']?>" method="POST">
+	
+
+
+
+<input type="text" value="$this->replies[0]['reply_body']" name="reply"/>
+ <input type="submit" class="btn btn-primary form-control" value="Edit Comment" name="submit" />
+<?php
+
+	}
+
+
+
+
+
+
+
+	?>
+
+</form>

@@ -8,7 +8,7 @@ class Application_Form_Adduser extends Zend_Form
         #################UserName#############################################
 	    $username = new Zend_Form_Element_Text("username");
 		$username->setRequired();
-		$username->addValidator(new Zend_Validate_Alpha());
+		//$username->addValidator(new Zend_Validate_Alpha());
 		$username->setlabel("UserName:");
 		$username->setAttrib("class","form-control");
 		$username->setAttrib("placeholder","Enter your username");
@@ -33,16 +33,7 @@ class Application_Form_Adduser extends Zend_Form
 		$password->setAttrib("placeholder","Enter your Password");
 		$password->setAttrib("class","form-control");
 		############################Picture#######################################
-		$picture = new Zend_Form_Element_File('picture');
-        $picture->setLabel('Upload an image:');
-        
-		// ensure only 1 file
-		$picture->addValidator('Count', false, 1);
-		// limit to 100K
 		
-		// only JPEG, PNG, and GIFs
-		$picture->addValidator('Extension', false, 'jpg,png,gif,JPEG');
-		$picture->setAttrib("class","form-control");
 		##########################Signature#######################################
         $signatuer = new Zend_Form_Element_Text("signatuer");
 		$signatuer->setRequired();
@@ -66,7 +57,7 @@ class Application_Form_Adduser extends Zend_Form
 		####################################country###############################	
 		$country = new Zend_Form_Element_Text("country");
 		$country->setRequired();
-		$country->addValidator(new Zend_Validate_Alpha());
+		//$country->addValidator(new Zend_Validate_Alpha());
 		$country->setlabel("Country:");
 		$country->setAttrib("class","form-control");
 		$country->setAttrib("placeholder","Enter your country");	
@@ -75,7 +66,7 @@ class Application_Form_Adduser extends Zend_Form
 		$submit->setAttrib("class","btn btn-primary");
 		###################3Add Elements To form############################
 
-	    $this->addElements(array($username, $email, $password, $picture,
+	    $this->addElements(array($username, $email, $password,
 	    	    $signatuer,$gender,$country,$submit));
     										
 

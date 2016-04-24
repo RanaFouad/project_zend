@@ -10,6 +10,8 @@ class ThreadController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        $this->model_replay=new Application_Model_DbTable_Replies();
+        $this->model_user=new Application_Model_DbTable_Users();
         $this->model = new Application_Model_DbTable_Thread();
         $this->model_sub_category = new Application_Model_DbTable_SubCategory();
     }
@@ -71,16 +73,161 @@ class ThreadController extends Zend_Controller_Action
 
     public function threaddetailsAction()
     {
+        $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();
         $data = $this->getRequest()->getParam('thread_id');
+        $replay = $this->getRequest()->getParam("replay");
         //var_dump($data);
         $thread = $this->model->getThreadById($data);
         //var_dump($post);
         $this->view->thread=$thread;
+      
+       if($this->getRequest()->isPost()){
+          $user_id=$user->user_id; 
+        
+        if ( $this->model_replay->addreplay($data,$replay,$user_id)){
+    
+              
+         
+       }
+       
+    }
+    $this->view->replies=$this->model_replay->getReplies(); 
+         
         //$comment = $this->modelcomment->listComments($data);
         //var_dump($comment);
-        //$this->view->comments = $this->modelcomment->listComments($data);
+    }
+    ///////////////////////////////////////////////////////
+    public function replayAction()
+    {
+
+        
 
     }
+
+    public function displayreplayAction()
+    {
+        // action body
+
+         $replay = $this->getRequest()->getParam("replay");
+         $auth = Zend_Auth::getInstance();
+         $user = $auth->getIdentity();
+         $user_id=$user->user_id; 
+         $id = $this->getRequest()->getParam("thread_id");
+          $this->model_replay->addReplay($id,$replay,$user_id);
+          $this->view->replies=$this->model_replay->getReplies();
+    }
+/////////////////////////////////Delete Replay ////////////////////////////////////
+    public function deletereplyAction()
+    {
+
+      $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();
+        $data = $this->getRequest()->getParam('thread_id');
+        $replay_id = $this->getRequest()->getParam("reply_id");
+        $this->model_replay->deleteReply($replay_id);
+       
+      //  echo($replay);
+        $thread = $this->model->getThreadById($data);
+       //  $user_id=$user->user_id;
+        //$this->view->userdata=$this->model_user->getUserById($user_id);
+    
+
+           
+        $this->view->replies=$this->model_replay->getReplies(); 
+         $this->view->database=$data;
+       
+        $this->view->thread=$thread;
+        $this->render('threaddetails');
+      
+    
+    
+    }
+//////////////////////////Edit Replay//////////////////////////////////////////
+    public function editreplyAction()
+    {
+        $replay_id = $this->getRequest()->getParam("reply_id");
+        $this->view->replies=$this->model_replay->getReply($replay_id);
+        $data = $this->getRequest()->getParam('thread_id');
+          $thread = $this->model->getThreadById($data);   
+
+
+     
+        
+    }
+    public function editAction()
+    {
+        $replay_id = $this->getRequest()->getParam("reply_id");
+         $replay = $this->getRequest()->getParam("reply");
+        $this->view->replies=$this->model_replay->editReply($replay_id,$reply);
+
+       $this->view->replies=$this->model_replay->getReplies(); 
+        $data = $this->getRequest()->getParam('thread_id');
+          $thread = $this->model->getThreadById($data);   
+
+       
+        $this->view->thread=$thread;
+        $this->render('threaddetails');
+
+     
+        
+    }
+    //////////////////////////////////Ban Reply////////////////
+    function banreplyAction(){
+              
+          $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();
+        $data = $this->getRequest()->getParam('thread_id');
+        $replay = $this->getRequest()->getParam("replay");
+        //var_dump($data);
+        $thread = $this->model->getThreadById($data);
+        //var_dump($post);
+        $this->view->thread=$thread;
+      
+      $this->model->setban($data);
+   //    $user_id=$user->user_id;
+     //   $this->view->userdata=$this->model_user->getUserById($user_id);
+    
+        
+        
+      $this->view->replies=$this->model_replay->getReplies(); 
+      $this->render('threaddetails');
+
+
+
+    }
+    //////////////////// Remove Ban
+    function releasebanreplyAction(){
+
+  $auth = Zend_Auth::getInstance();
+        $user = $auth->getIdentity();
+        $data = $this->getRequest()->getParam('thread_id');
+        $replay = $this->getRequest()->getParam("replay");
+        //var_dump($data);
+        $thread = $this->model->getThreadById($data);
+        //var_dump($post);
+        $this->view->thread=$thread;
+      
+      $this->model->releaseban($data);
+       //$user_id=$user->user_id;
+        //$this->view->userdata=$this->model_user->getUserById($user_id);
+    
+        
+        
+      $this->view->replies=$this->model_replay->getReplies(); 
+      $this->render('threaddetails');
+
+
+
+
+
+
+
+
+
+    }
+
+
 
     public function deletethreadAction()
     {

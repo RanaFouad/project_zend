@@ -65,6 +65,26 @@ class Application_Model_DbTable_Thread extends Zend_Db_Table_Abstract
 	{
 		return $this->update($data,'thread_id='.$id);	
 	}
+	///////////////////////////Set Ban/////////////
+	function setban($id){
+         $data = array(
+    	'ban_reply' => 1);
+   		$where = "thread_id = " . $id;
+  		return  $this->update($data, $where );
+
+
+
+	}
+	//////////////////////Release Ban///////////////
+	function releaseban($id){
+
+         $data = array(
+    	'ban_reply' => 0);
+   		$where = "thread_id = " . $id;
+  		return  $this->update($data, $where );
+
+
+	}
 
 }
 

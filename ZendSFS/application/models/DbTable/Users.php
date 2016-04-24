@@ -79,6 +79,32 @@ class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
   		return  $this->update($data, $where );
 
 	}
+	function removeban($id){
+   $data = array(
+    'ban' => 0);
+   $where = "user_id = " . $id;
+
+		
+	
+  return  $this->update($data, $where );
+
+}
+function desystem(){
+   		$data = array(
+    	'systemclosed' => 1);
+   		$where = "admin = 0";
+  		return  $this->update($data, $where );
+
+	}
+###################Activate System##################################
+  function acsystem(){
+   		$data = array(
+    	'systemclosed' => 0);
+   		
+  		return  $this->update($data);
+
+	}
+
 
 function getUserByEmail($email)
 	{

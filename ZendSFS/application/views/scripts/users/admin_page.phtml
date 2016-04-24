@@ -7,22 +7,12 @@
 	
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Posts/list">Home</a></li>
-      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Users/add">Add User</a></li>
-      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Posts/add">List Users </a></li>
-      <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Posts/add">List Admins </a></li>
-       <li class="active"><a href="<?php echo $this->baseUrl()?>/index.php/Posts/add">Ban Users </a></li>
-     
-    </ul>
-  </div>
-</nav>
-
+ <a  class="btn" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/list/'?>">Home</a>
+      <a class="btn"  href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/add/'?>">Add User</a>
+      
+      <a  class="btn" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/listadmin'?>">List Admins </a>
+       <a  class="btn" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/listbausers'?>">Ban Users </a>
+        <a  class="btn" href="<?php echo $this->baseUrl().'/Zend/ZendSFS/public/index.php/users/system'?>">System Status </a>
 
 
 </body>
